@@ -1,7 +1,9 @@
-resolver: lts-9.10
+resolver: lts-10.4
 
 packages: ['.']
-extra-deps: []
+
+extra-deps:
+  - registry-0.1.0.4
 
 flags: {}
 

@@ -17,6 +17,7 @@ default-extensions:
 - GeneralizedNewtypeDeriving
 - LambdaCase
 - OverloadedStrings
+- TypeApplications
 
 library:
   dependencies:
@@ -24,6 +25,8 @@ library:
   - monad-logger
   - monad-time
   - mtl
+  - protolude
+  - registry
   - text
   - time
   - transformers
