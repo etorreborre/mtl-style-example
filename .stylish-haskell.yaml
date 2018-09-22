@@ -32,6 +32,7 @@ language_extensions:
   - LambdaCase
   - MultiParamTypeClasses
   - NoImplicitPrelude
+  - NamedFieldPuns
   - OverloadedStrings
   - Rank2Types
   - ScopedTypeVariables

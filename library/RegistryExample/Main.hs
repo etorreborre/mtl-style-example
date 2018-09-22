@@ -1,5 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-module MTLStyleExample.Main2 where
+
+module RegistryExample.Main where
 
 import qualified Data.Text                  as T
 
@@ -14,11 +15,13 @@ import           RegistryExample.Time       as Time
 
 
 main :: IO ()
-main = do
-  let time       = make @Time registry
-  let logger     = make @Logger registry
-  let fileSystem = make @FileSystem registry
-  let arguments  = make @Arguments registry
+main = mainWith registry
+
+mainWith r = do
+  let arguments  = make @Arguments r
+  let fileSystem = make @FileSystem r
+  let logger     = make @Logger r
+  let time       = make @Time r
 
   startTime  <- time & getCurrentTime
   [fileName] <- arguments & getArguments
