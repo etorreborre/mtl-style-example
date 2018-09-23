@@ -9,7 +9,6 @@ import           RegistryExample.Main
 import           RegistryExample.Test.Stubs
 import           Test.Hspec
 
-spec :: Spec
 spec = describe "main" $ do
   logMessages <- runIO $ messages
 

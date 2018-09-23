@@ -1,3 +1,4 @@
+{-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module RegistryExample.Main where
@@ -13,24 +14,22 @@ import           RegistryExample.FileSystem as FileSystem
 import           RegistryExample.Logger     as Logger
 import           RegistryExample.Time       as Time
 
-
 main :: IO ()
 main = mainWith registry
 
 mainWith r = do
-  let arguments  = make @Arguments r
-  let fileSystem = make @FileSystem r
-  let logger     = make @Logger r
-  let time       = make @Time r
+  let Arguments {..}  = make @Arguments r
+  let FileSystem {..} = make @FileSystem r
+  let Logger {..}     = make @Logger r
+  let Time  {..}      = make @Time r
+  startTime  <- getCurrentTime
+  [fileName] <- getArguments
+  target     <- readFile $ fileName
+  info $ "Hello, " <> target <> "!"
 
-  startTime  <- time & getCurrentTime
-  [fileName] <- arguments & getArguments
-  target     <- fileSystem & readFile $ fileName
-  logger & info $ "Hello, " <> target <> "!"
-
-  endTime <- time & getCurrentTime
+  endTime <- getCurrentTime
   let duration = endTime `diffUTCTime` startTime
-  logger & info $ T.pack (show (round (duration * 1000) :: Integer)) <> " milliseconds"
+  info $ T.pack (show (round (duration * 1000) :: Integer)) <> " milliseconds"
 
 registry =
      fun Time.new
